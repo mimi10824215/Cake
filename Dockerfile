@@ -11,7 +11,7 @@ WORKDIR /src
 COPY . .
 
 # 還原 NuGet 套件（請確認你專案名稱是 CakeShop）
-RUN dotnet restore CakeShop/CakeShop.csproj
+RUN dotnet restore Cakeshop/Cakeshop.csproj
 
 # 建立並發布專案
 RUN dotnet publish Cakeshop/Cakeshop.csproj -c Release -o /app/publish
