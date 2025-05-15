@@ -8,14 +8,14 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlServer(connectionString)); // ©ÎªÌ UseSqlite, UseNpgsql µ¥
+    options.UseInMemoryDatabase("FakeDb")); // æˆ–è€… UseSqlite, UseNpgsql ç­‰
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-// ====================> ÀË¬d¨Ã­×§ï³o¤@°Ï¶ô <====================
-// **­«ÂI¡G** ½T«O AddDefaultIdentity ©Î AddIdentity ªºªx«¬°Ñ¼Æ¬O ApplicationUser
-builder.Services.AddDefaultIdentity<ApplicationUser>(options => { // <-- «ü©w ApplicationUser
-                                                                  // ¦b³o¸Ì³]©w Identity ¿ï¶µ¡A¨Ò¦p¬O§_»İ­n½T»{ Email¡A±K½X³W«hµ¥
-    options.SignIn.RequireConfirmedAccount = false; // ¶}µo®É³]¬° false ¸û¤è«K
+// ====================> æª¢æŸ¥ä¸¦ä¿®æ”¹é€™ä¸€å€å¡Š <====================
+// **é‡é»ï¼š** ç¢ºä¿ AddDefaultIdentity æˆ– AddIdentity çš„æ³›å‹åƒæ•¸æ˜¯ ApplicationUser
+builder.Services.AddDefaultIdentity<ApplicationUser>(options => { // <-- æŒ‡å®š ApplicationUser
+                                                                  // åœ¨é€™è£¡è¨­å®š Identity é¸é …ï¼Œä¾‹å¦‚æ˜¯å¦éœ€è¦ç¢ºèª Emailï¼Œå¯†ç¢¼è¦å‰‡ç­‰
+    options.SignIn.RequireConfirmedAccount = false; // é–‹ç™¼æ™‚è¨­ç‚º false è¼ƒæ–¹ä¾¿
     options.Password.RequireDigit = false;
     options.Password.RequireLowercase = false;
     options.Password.RequireNonAlphanumeric = false;
@@ -23,20 +23,20 @@ builder.Services.AddDefaultIdentity<ApplicationUser>(options => { // <-- «ü©w Ap
     options.Password.RequiredLength = 6;
     options.Password.RequiredUniqueChars = 1;
 })
-    // **­«ÂI¡G** ½T«O³sµ²¨ì§Aªº ApplicationDbContext
+    // **é‡é»ï¼š** ç¢ºä¿é€£çµåˆ°ä½ çš„ ApplicationDbContext
     .AddEntityFrameworkStores<ApplicationDbContext>();
 // ==============================================================
 
-// ¦pªG§A»İ­n¨Ï¥Î¨¤¦âºŞ²z (Roles)¡A«h§ï¥Î AddIdentity
-// builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options => { // <-- «ü©w ApplicationUser ©M IdentityRole
+// å¦‚æœä½ éœ€è¦ä½¿ç”¨è§’è‰²ç®¡ç† (Roles)ï¼Œå‰‡æ”¹ç”¨ AddIdentity
+// builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options => { // <-- æŒ‡å®š ApplicationUser å’Œ IdentityRole
 //         options.SignIn.RequireConfirmedAccount = false;
-//         // ... ¨ä¥L¿ï¶µ ...
+//         // ... å…¶ä»–é¸é … ...
 //     })
 //     .AddEntityFrameworkStores<ApplicationDbContext>()
-//     .AddDefaultTokenProviders(); // AddIdentity ³q±`»İ­n³o­Ó
+//     .AddDefaultTokenProviders(); // AddIdentity é€šå¸¸éœ€è¦é€™å€‹
 
 builder.Services.AddControllersWithViews();
-builder.Services.AddRazorPages(); // ¦pªG§A¦³¨Ï¥Î Razor Pages (¹³ Identity UI ´N¬O)¡A»İ­n³o¦æ
+builder.Services.AddRazorPages(); // å¦‚æœä½ æœ‰ä½¿ç”¨ Razor Pages (åƒ Identity UI å°±æ˜¯)ï¼Œéœ€è¦é€™è¡Œ
 
 var app = builder.Build();
 
@@ -56,28 +56,28 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
-// ====================> ÀË¬d Middleware ¶¶§Ç <====================
-// **­«ÂI¡G** UseAuthentication ¥²¶·¦b UseAuthorization ¤§«e
-app.UseAuthentication(); // ±Ò¥ÎÅçÃÒ¥\¯à
-app.UseAuthorization(); // ±Ò¥Î±ÂÅv¥\¯à
+// ====================> æª¢æŸ¥ Middleware é †åº <====================
+// **é‡é»ï¼š** UseAuthentication å¿…é ˆåœ¨ UseAuthorization ä¹‹å‰
+app.UseAuthentication(); // å•Ÿç”¨é©—è­‰åŠŸèƒ½
+app.UseAuthorization(); // å•Ÿç”¨æˆæ¬ŠåŠŸèƒ½
 // ==============================================================
 
 
-// **­«ÂI¡G** ½T«O MapRazorPages() ³Q©I¥s¡A³o¼Ë Identity ªº­¶­±¤~¯à¹B§@
-app.MapRazorPages(); // ¬M®g Identity UI (Razor Pages) ªº¸ô¥Ñ
+// **é‡é»ï¼š** ç¢ºä¿ MapRazorPages() è¢«å‘¼å«ï¼Œé€™æ¨£ Identity çš„é é¢æ‰èƒ½é‹ä½œ
+app.MapRazorPages(); // æ˜ å°„ Identity UI (Razor Pages) çš„è·¯ç”±
 
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
-// ¸ê®Æ®wªì©l¤Æ (¦pªG¦³ªº¸Ü)
+// è³‡æ–™åº«åˆå§‹åŒ– (å¦‚æœæœ‰çš„è©±)
 using (var scope = app.Services.CreateScope())
 {
     var services = scope.ServiceProvider;
     try
     {
         var context = services.GetRequiredService<ApplicationDbContext>();
-        // context.Database.Migrate(); // ¥i¿ï
+        // context.Database.Migrate(); // å¯é¸
         DbInitializer.Initialize(context);
     }
     catch (Exception ex)
