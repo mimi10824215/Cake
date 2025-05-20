@@ -1,4 +1,4 @@
-﻿using Cakeshop.Data;
+using Cakeshop.Data;
 using Cakeshop.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -58,12 +58,17 @@ namespace Cakeshop.Controllers
                 TempData["CartMessage"] = "數量必須大於0";
                 return RedirectToAction("Details", "Cakes", new { id = cakeId });
             }
+
             var cartItem = await _context.ShoppingCartItems
                                 .FirstOrDefaultAsync(c => c.UserId == userId && c.CakeId == cakeId);
 
             var cake = await _context.Cakes.FindAsync(cakeId);
-            if (cake == null) { return NotFound("找無此蛋糕"); }
-            if (cartItem!= null)
+            if (cake == null)
+            {
+                return NotFound("找無此蛋糕");
+            }
+
+            if (cartItem == null)
             {
                 cartItem = new ShoppingCartItem
                 {
@@ -77,8 +82,9 @@ namespace Cakeshop.Controllers
             {
                 cartItem.Quantity += quantity;
             }
+
             await _context.SaveChangesAsync();
-            TempData["CartMessage"] = $"已將{quantity}個{cake.Name}加入購物車中!";
+            TempData["CartMessage"] = $"已將 {quantity} 個 {cake.Name} 加入購物車中!";
             return RedirectToAction(nameof(Index));
         }
 
