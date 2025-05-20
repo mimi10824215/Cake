@@ -120,7 +120,7 @@ namespace Cakeshop.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> UpdataQuantity(int id, int quantity)
+        public async Task<IActionResult> UpdateQuantity(int id, int quantity)
         {
             var userId = GetUserId();
             if (string.IsNullOrEmpty(userId))
