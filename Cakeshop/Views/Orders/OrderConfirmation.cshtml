@@ -1,4 +1,4 @@
-﻿@model Cakeshop.Models.Order
+@model Cakeshop.Models.Order
 @{
     ViewData["Title"] = "訂單完成";
 }
@@ -20,7 +20,7 @@
         <p><strong>狀態:</strong>@Html.DisplayFor(model=>model.Status)</p>
         <p><strong>收件人:</strong>@Html.DisplayFor(model=>model.RecipientName)</p>
         <p><strong>電話:</strong>@Html.DisplayFor(model => model.RecipientPhone)</p>
-        <p><strong>地址:</strong>@Html.DisplayFor(model => model.ShoppingAddess)</p>
+        <p><strong>地址:</strong>@Html.DisplayFor(model => model.ShoppingAddress)</p>
     </div>
     <h6 class="mt-4">訂購商品：</h6>
     <ul class="list-group list-group-flush">
@@ -35,6 +35,6 @@
 	<p class="text-end mt-2"><strong>訂單總額:@Model.TotalAmount.ToString("C")</strong></p>
     <div class="card-footer text-muted">
         <a asp-action="Index" class="btn btn-outline-primary">查看我的所有訂單</a>
-        <a asp-action="Home" asp-controller="Index" class="btn btn-outline-secondary">返回首頁</a>
+        <a asp-action="Index" asp-controller="Home" class="btn btn-outline-secondary">返回首頁</a>
     </div>
 </div>
