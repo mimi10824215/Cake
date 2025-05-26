@@ -1,4 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 
 namespace Cakeshop.Models
@@ -12,6 +12,7 @@ namespace Cakeshop.Models
         [ForeignKey("OrderId")]
 
         public virtual Order? Order { get; set; }
+        public int CakeId { get; set; }
 
         public virtual Cake? Cake { get; set; }
 
