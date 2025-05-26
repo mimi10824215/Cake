@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -39,7 +39,7 @@ namespace Cakeshop.Models
         [Required]
         [StringLength(100)]
         [Display(Name = "收貨地址")]
-        public string ShoppingAddess { get; set; }= string.Empty;
+        public string ShoppingAddress { get; set; }= string.Empty;
         [Required]
         [StringLength(50)]
         [Display(Name = "取件人姓名")]
