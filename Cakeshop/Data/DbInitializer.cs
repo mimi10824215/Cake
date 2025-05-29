@@ -22,7 +22,7 @@ namespace Cakeshop.Data
             new Cake { Name = "培根起司牛肉堡", Description = "培根、起司與牛肉的完美結合", Price = 130.00m, ImageUrl = "/images/Bacon Cheeseburger.jpg" },
             new Cake { Name = "雙層牛肉堡", Description = "雙層牛肉滿足你的飢餓感", Price = 120.00m, ImageUrl = "/images/Double Cheeseburger.jpg" },
             new Cake { Name = "香辣雞肉三明治", Description = "香辣雞肉搭配爽口生菜", Price = 110.00m, ImageUrl = "/images/Spicy Chicken Sandwich.jpg" },
-            new Cake { Name = "烤雞三明治", Description = "健康烤雞與新鮮麵包的完美搭配", Price = 110.00m, ImageUrl = "/images/Grilled chicken Sandwich.jpg" },
+            new Cake { Name = "烤雞三明治", Description = "健康烤雞與新鮮麵包的完美搭配", Price = 110.00m, ImageUrl = "/images/Grilled Chicken Sandwich.jpg" },
             new Cake { Name = "俱樂部三明治", Description = "層層堆疊的經典三明治", Price = 110.00m, ImageUrl = "/images/Club Sandwich.jpg" },
             new Cake { Name = "費城牛肉起司三明治", Description = "香煎牛肉配上濃郁起司", Price = 110.00m, ImageUrl = "/images/Philly Cheesesteak Sandwich.jpg" },
             new Cake { Name = "熱狗", Description = "經典熱狗配上香軟麵包", Price = 50.00m, ImageUrl = "/images/hot dog.jpg" },
