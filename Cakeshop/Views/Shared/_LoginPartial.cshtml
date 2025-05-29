@@ -1,0 +1,40 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+@using Cakeshop.Models
+
+<ul class="navbar-nav">
+
+    <a class="nav-link text-dark position-relative" asp-controller="ShoppingCart" asp-action="Index">
+        🛒 購物車
+        @if (ViewBag.CartItemCount > 0)
+        {
+            <span class="badge rounded-pill bg-danger cart-badge">
+                @ViewBag.CartItemCount
+                <span class="visually-hidden">items in cart</span>
+            </span>
+        }
+    </a>
+
+    
+@if (SignInManager.IsSignedIn(User))
+{
+    <li class="nav-item">
+        <a  class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">歡迎 @User.Identity?.Name!</a>
+    </li>
+    <li class="nav-item">
+        <form  class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+            <button  type="submit" class="nav-link btn btn-link text-dark">Logout</button>
+        </form>
+    </li>
+}
+else
+{
+    <li class="nav-item">
+        <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Register">Register</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Login">Login</a>
+    </li>
+}
+</ul>
